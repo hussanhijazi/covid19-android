@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Covid 19</string>
+    <string name="uncategorized">Uncategorized</string>
+    <string name="error_message">An error has occurred. Please try again</string>
+    <string name="no_results">No results, try again</string>
+    <string name="confirmed_cases">Casos Confirmados</string>
+    <string name="deaths">Mortes</string>
+    <string name="cases_per">%1$s casos a cada 100 mil habitantes</string>
+    <string name="cases_per_milion">%1$s casos a cada milhão de habitante</string>
+    <string name="type_city">Digite a cidade...</string>
+
+</resources>
