@@ -5,10 +5,10 @@ App to show covid-19 data from Brazil and Brazilian cities.
 Using "Clean Architecture" based on Antonio Leivas and BufferApp implementations.
 
 ## Covid-19 Apis references
-https://brasil.io/api/dataset/covid19/
-https://coronavirus-tracker-api.herokuapp.com/
-https://corona.lmao.ninja/v2/historical/brazil
-https://coronavirus-19-api.herokuapp.com/
+* https://brasil.io/api/dataset/covid19/
+* https://coronavirus-tracker-api.herokuapp.com/
+* https://corona.lmao.ninja/v2/historical/brazil
+* https://coronavirus-19-api.herokuapp.com/
 
 ### Modules
 #### domain
