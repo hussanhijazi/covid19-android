@@ -9,7 +9,9 @@ import br.com.hussan.covid19.domain.CityCasesResult
 import br.com.hussan.covid19.domain.CountryCases
 import br.com.hussan.covid19.extensions.add
 import br.com.hussan.covid19.extensions.hide
+import br.com.hussan.covid19.extensions.hideKeyboard
 import br.com.hussan.covid19.extensions.show
+import com.hbb20.CountryCodePicker.OnCountryChangeListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -17,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_cases.*
 import kotlinx.android.synthetic.main.lyt_city.view.*
 import kotlinx.android.synthetic.main.lyt_city.view.txtCases
 import kotlinx.android.synthetic.main.lyt_city.view.txtDeaths
+import kotlinx.android.synthetic.main.lyt_country.*
 import kotlinx.android.synthetic.main.lyt_country.view.*
 import kotlinx.android.synthetic.main.lyt_loading.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,15 +29,16 @@ class CasesActivity : AppCompatActivity() {
 
     private val viewModel: CasesViewModel by viewModel()
     private val compositeDisposable = CompositeDisposable()
-    val country = "Brazil"
+    private val country = "BR"
+    private val city = "Brasília"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cases)
 
         configureViews()
-        getCountryCases("Brazil")
-        getCityCases("Foz")
+
+        countrySpinner.setCountryForNameCode(country)
     }
 
     private fun getCountryCases(country: String) {
@@ -60,7 +64,6 @@ class CasesActivity : AppCompatActivity() {
     }
 
     private fun showCountryCases(country: CountryCases) {
-        lytCountry.txtCountry.text = this.country
         lytCountry.txtCases.text = country.cases.toString()
         lytCountry.txtDeaths.text = country.deaths.toString()
         lytCountry.txtCasesConfirmedCountry.text = getString(
@@ -79,27 +82,28 @@ class CasesActivity : AppCompatActivity() {
         lytCity.txtCasesConfirmed.text =
             getString(
                 R.string.cases_per,
-                String.format("%.2f", cityCase.confirmed_per_100k_inhabitants)
+                String.format("%.2f", cityCase.confirmedPer100kInhabitants)
             )
 
     }
 
     private fun configureViews() {
-        lytCity.edtSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        lytCity.edtSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 getCityCases(v.text.toString())
+                hideKeyboard()
                 return@OnEditorActionListener true
             }
             false
         })
-    }
 
-    private fun showEmptyState() {
-
-    }
-
-    private fun showRecyclerViewFacts() {
-
+        countrySpinner.setOnCountryChangeListener(OnCountryChangeListener {
+            getCountryCases(countrySpinner.selectedCountryEnglishName)
+            if (countrySpinner.selectedCountryNameCode == country) {
+                lytCity.show()
+                getCityCases(city)
+            } else lytCity.hide()
+        })
     }
 
     private fun showError(error: Throwable) {

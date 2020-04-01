@@ -5,17 +5,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/txtCountry"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
+    <com.hbb20.CountryCodePicker
+            android:id="@+id/countrySpinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textSize="22sp"
+            android:layout_marginEnd="16dp"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_countryPreference="BR"
+            app:ccp_showFullName="true"
+            app:ccp_showNameCode="false"
+            app:ccp_showPhoneCode="false"
+            app:ccp_textGravity="LEFT"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Brazil" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    <TextView-->
+    <!--            android:id="@+id/txtCountry"-->
+    <!--            style="@style/TextAppearance.AppCompat.Title"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:textSize="22sp"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/countrySpinner"-->
+    <!--            tools:text="Brazil" />-->
 
     <TextView
             android:id="@+id/textView2"
@@ -25,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/confirmed_cases"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCountry" />
+            app:layout_constraintTop_toBottomOf="@+id/countrySpinner" />
 
     <androidx.cardview.widget.CardView
             android:id="@+id/cardView1"
@@ -68,7 +84,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/deaths"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/txtCountry" />
+            app:layout_constraintTop_toBottomOf="@+id/countrySpinner" />
 
     <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

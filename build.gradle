@@ -53,6 +53,8 @@ ext {
     gsonVersion = "2.8.5"
     roomVersion = '2.1.0-alpha04'
 
+    countrySpinner = "2.3.8"
+
     jUnitVersion = '4.12'
     runnerVersion = '1.1.2-alpha01'
     expressoVersion = '3.1.2-alpha01'
