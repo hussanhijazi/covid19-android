@@ -1,6 +1,12 @@
 # Clean Architecture
 App to show covid-19 data from Brazil and Brazilian cities.
 
+## Create google_maps_api.xml file in app/src/debug/res/values/ with your Google Maps Key
+    <resources>
+        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
+    </resources>
+
+
 ## Code
 Using "Clean Architecture" based on Antonio Leivas and BufferApp implementations.
 
