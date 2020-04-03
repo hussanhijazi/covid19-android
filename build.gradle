@@ -24,7 +24,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        maven { url 'https://jitpack.io' }
     }
     allprojects {
         apply from: "$rootDir/detekt.gradle"
@@ -37,7 +37,7 @@ task clean(type: Delete) {
 task allTests(dependsOn: [':app:connectedAndroidTest', ':cache:connectedAndroidTest', ':data:test', ':usecases:test'])
 
 ext {
-    koinVersion = '2.0.1'
+    koinVersion = '2.1.5'
     rxAndroidVersion = '2.1.1'
     appCompatVersion = '1.1.0-alpha02'
     roomVersion = '2.1.0-alpha04'
@@ -50,10 +50,13 @@ ext {
     materialComponents = '1.1.0-alpha04'
 
     retrofitVersion = "2.5.0"
-    gsonVersion = "2.8.5"
+    gsonVersion = "2.8.6"
     roomVersion = '2.1.0-alpha04'
 
     countrySpinner = "2.3.8"
+    mpChartVersion = "v3.1.0"
+    rxKotlinVersion = "2.3.0"
+    mapsVersion = "17.0.0"
 
     jUnitVersion = '4.12'
     runnerVersion = '1.1.2-alpha01'

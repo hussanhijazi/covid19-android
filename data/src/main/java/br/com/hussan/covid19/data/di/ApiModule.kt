@@ -23,10 +23,13 @@ val apiModule = module {
 }
 
 private inline fun <reified T> createWebService(okHttpClient: OkHttpClient, url: String): T {
+
     val retrofit = Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(
+            GsonConverterFactory.create()
+        )
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
     return retrofit.create(T::class.java)

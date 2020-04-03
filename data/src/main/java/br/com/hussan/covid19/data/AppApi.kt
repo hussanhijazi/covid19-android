@@ -2,6 +2,7 @@ package br.com.hussan.covid19.data
 
 import br.com.hussan.covid19.domain.CityCasesResult
 import br.com.hussan.covid19.domain.CountryCases
+import br.com.hussan.covid19.domain.CountryHistoryCases
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,4 +19,9 @@ interface AppApi {
     fun getCountryCases(
         @Path("country") country: String
     ): Observable<CountryCases>
+
+    @GET("https://corona.lmao.ninja/v2/historical/{country}")
+    fun getCountryHistoryCases(
+        @Path("country") country: String
+    ): Observable<CountryHistoryCases>
 }

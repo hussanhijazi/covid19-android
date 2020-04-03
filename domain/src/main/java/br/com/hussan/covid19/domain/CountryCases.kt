@@ -1,5 +1,7 @@
 package br.com.hussan.covid19.domain
 
+import java.io.Serializable
+
 data class CountryCases(
     val active: Int,
     val cases: Int,
@@ -12,4 +14,4 @@ data class CountryCases(
     val recovered: Int,
     val todayCases: Int,
     val todayDeaths: Int
-)
+) : Serializable

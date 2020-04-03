@@ -37,19 +37,24 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.core:core-ktx:$androidxCode"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "com.google.android.material:material:$materialComponents"
-
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$viewModelVersion"
-
-    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-
+    implementation "androidx.core:core-ktx:$androidxCode"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$viewModelVersion"
     implementation "androidx.cardview:cardview:$cardViewVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "com.google.android.material:material:$materialComponents"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$viewModelVersion"
+    implementation "com.google.android.gms:play-services-maps:$mapsVersion"
+
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+
     implementation "com.hbb20:ccp:$countrySpinner"
+    implementation "com.github.PhilJay:MPAndroidChart:$mpChartVersion"
 
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
