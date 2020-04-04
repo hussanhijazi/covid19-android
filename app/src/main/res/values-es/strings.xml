@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Coronavid 19 Tracker</string>
     <string name="confirmed_cases">Casos Confirmados</string>
-    <string name="deaths">Mortes</string>
+    <string name="deaths">Muertes</string>
     <string name="cases_per">%1$s casos a cada 100 mil habitantes</string>
     <string name="cases_per_milion">%1$s casos a cada milhão de habitante</string>
     <string name="cases_deaths_infos">&lt;b&gt;Casos: &lt;/b&gt;%1$d&lt;br /&gt;&lt;b&gt;Mortes: &lt;/b&gt;%2$d&lt;br /&gt;&lt;b&gt;Recuperados: &lt;/b&gt;%3$d</string>

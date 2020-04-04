@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Coronavid 19 Tracker</string>
+    <string name="confirmed_cases">Casi Confermati</string>
+    <string name="deaths">Morti</string>
+    <string name="cases_per">%1$s casi per centomila abitanti</string>
+    <string name="cases_per_milion">%1$s casi per milione di abitanti</string>
+    <string name="cases_deaths_infos">&lt;b&gt;Casi: &lt;/b&gt;%1$d&lt;br /&gt;&lt;b&gt;Morti: &lt;/b&gt;%2$d&lt;br /&gt;&lt;b&gt;Ripresi: &lt;/b&gt;%3$d</string>
+    <string name="type_city">Inserisci una città ...</string>
+    <string name="cases">Casi</string>
+    <string name="recovered">Ripresi</string>
+
+</resources>
