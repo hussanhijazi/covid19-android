@@ -5,6 +5,6 @@ import java.io.Serializable
 
 data class CountryHistoryCases(
     val country: String,
-    val provinces: List<Any>,
+    val provinces: List<String>,
     val timeline: Timeline
 ) : Serializable

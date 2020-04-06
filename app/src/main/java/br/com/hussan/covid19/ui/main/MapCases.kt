@@ -3,6 +3,7 @@ package br.com.hussan.covid19.ui.main
 import android.content.Context
 import android.location.Geocoder
 import android.os.Bundle
+import androidx.annotation.UiThread
 import br.com.hussan.covid19.R
 import br.com.hussan.covid19.domain.CountryCases
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -41,13 +42,13 @@ class MapCases(
         }
     }
 
+    @UiThread
     fun configureMap(savedInstanceState: Bundle?, mapView: MapView) {
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(CasesActivity.MAPVIEW_BUNDLE_KEY)
         }
         mapView.onCreate(mapViewBundle)
-
         mapView.getMapAsync(onReadyMapReadyCallback)
     }
 
