@@ -14,11 +14,11 @@ import br.com.hussan.covid19.extensions.hideKeyboard
 import br.com.hussan.covid19.extensions.show
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.hbb20.CountryCodePicker.OnCountryChangeListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_cases.*
+import kotlinx.android.synthetic.main.lyt_city.*
 import kotlinx.android.synthetic.main.lyt_city.view.*
 import kotlinx.android.synthetic.main.lyt_city.view.txtCases
 import kotlinx.android.synthetic.main.lyt_city.view.txtDeaths
@@ -43,11 +43,7 @@ class CasesActivity : AppCompatActivity(),
     private val countryToFix = hashMapOf("US" to "USA")
 
     private val chartCases by lazy { ChartCases(this) }
-    private val mapCases by lazy { MapCases(this, this) }
-
-    companion object {
-        const val MAPVIEW_BUNDLE_KEY = "MAPVIEW_BUNDLE_KEY"
-    }
+    private val mapCases by lazy { MapCases(this, this, mapView) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +53,7 @@ class CasesActivity : AppCompatActivity(),
 
         configureViews()
 
-        mapCases.configureMap(savedInstanceState, mapView)
+        mapCases.configureMap(savedInstanceState)
 
         if (savedInstanceState == null)
             countrySpinner.setCountryForNameCode(country)
@@ -81,12 +77,13 @@ class CasesActivity : AppCompatActivity(),
     }
 
     private fun getCityCases(query: String) {
+
         viewModel.getCityCases(query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { showLoading(true) }
-            .doFinally { showLoading(false) }
-            .doOnError { showLoading(false) }
+            .doFinally { lytCityProgress.hide() }
+            .doOnSubscribe { lytCityProgress.show() }
+            .doOnError { lytCityProgress.hide() }
             .subscribe(::showCityCases, ::showError)
             .add(compositeDisposable)
     }
@@ -138,7 +135,7 @@ class CasesActivity : AppCompatActivity(),
             false
         })
 
-        countrySpinner.setOnCountryChangeListener(OnCountryChangeListener {
+        countrySpinner.setOnCountryChangeListener {
             var countryName = countrySpinner.selectedCountryEnglishName
             val countryToFix = countryToFix[countrySpinner.selectedCountryNameCode]
             countryToFix?.let { countryName = countryToFix }
@@ -147,28 +144,24 @@ class CasesActivity : AppCompatActivity(),
                 lytCity.show()
                 getCityCases(city)
             } else lytCity.hide()
-        })
+        }
     }
 
     private fun showError(error: Throwable) {
+        lytCountry.txtCases.text = "--"
+        lytCountry.txtDeaths.text = "--"
+        lytCountry.txtCasesConfirmedCountry.text = "--"
     }
 
     private fun showLoading(show: Boolean) {
         if (show)
-            progressBar.show()
         else
             progressBar.hide()
     }
 
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        var mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)
-        if (mapViewBundle == null) {
-            mapViewBundle = Bundle()
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
-        }
-        mapView.onSaveInstanceState(mapViewBundle)
+        mapCases.onSaveInstanceState(outState)
         viewModel.saveStates(countryCases, countryHistory, cityCases)
 
     }

@@ -16,11 +16,15 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapCases(
     private val context: Context,
-    private val onReadyMapReadyCallback: OnMapReadyCallback
+    private val onReadyMapReadyCallback: OnMapReadyCallback,
+    private val mapView: MapView
 ) {
 
     private val geoCoder by lazy { Geocoder(context) }
 
+    companion object {
+        const val MAPVIEW_BUNDLE_KEY = "MAPVIEW_BUNDLE_KEY"
+    }
     fun addMarker(googleMap: GoogleMap?, country: CountryCases, countryName: String) {
         if (googleMap != null) {
             val p = geoCoder.getFromLocationName(countryName, 10)
@@ -42,11 +46,20 @@ class MapCases(
         }
     }
 
+    fun onSaveInstanceState(outState: Bundle?) {
+        var mapViewBundle = outState?.getBundle(MAPVIEW_BUNDLE_KEY)
+        if (mapViewBundle == null) {
+            mapViewBundle = Bundle()
+            outState?.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
+        }
+        mapView.onSaveInstanceState(mapViewBundle)
+    }
+
     @UiThread
-    fun configureMap(savedInstanceState: Bundle?, mapView: MapView) {
+    fun configureMap(savedInstanceState: Bundle?) {
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(CasesActivity.MAPVIEW_BUNDLE_KEY)
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY)
         }
         mapView.onCreate(mapViewBundle)
         mapView.getMapAsync(onReadyMapReadyCallback)
