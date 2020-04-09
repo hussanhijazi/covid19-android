@@ -2,15 +2,27 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply from: "$rootDir/git-version.gradle"
+
 
 android {
+    signingConfigs {
+        covid19 {
+            storeFile file(rootProject.ext.release_key)
+            storePassword rootProject.ext.storePassword
+            keyAlias = rootProject.ext.keyAlias
+            keyPassword rootProject.ext.keyPassword
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "br.com.hussan.covid19"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode gitVersionCode
+        versionName gitVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -24,6 +36,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.covid19
 
         }
     }
@@ -55,6 +68,12 @@ dependencies {
 
     implementation "com.hbb20:ccp:$countrySpinner"
     implementation "com.github.PhilJay:MPAndroidChart:$mpChartVersion"
+
+    // Recommended: Add the Firebase SDK for Google Analytics.
+//    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+
+    // Add the Firebase SDK for Crashlytics.
+//    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta03'
 
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"

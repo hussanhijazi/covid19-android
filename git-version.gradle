@@ -1,0 +1,39 @@
+ext {
+    gitVersionName = generateVersionName()
+    gitVersionCode = generateVersionCode()
+}
+
+task printVersion {
+    println("Version Name: $gitVersionName")
+    println("Version Code: $gitVersionCode")
+}
+
+def gitRevision() {
+    def cmd = "git rev-parse --short HEAD"
+    return cmd.execute().text.trim()
+}
+
+def gitRevisionDate() {
+    def cmd = "git show -s --format=%ci HEAD^{commit}"
+    return cmd.execute().text.trim()
+}
+
+def generateVersionCode() {
+    def cmd = "git rev-list HEAD --count"
+    return cmd.execute().text.trim().toInteger()
+}
+
+def generateVersionName() {
+    def ret = gitTag() + "-" + generateVersionCode() + "-" + gitRevision()
+    return ret
+}
+
+def gitTag() {
+    def cmd = 'git describe --tags --abbrev=0'
+    def name = cmd.execute().text.trim()
+    def tag = ""
+    if (name.isEmpty())
+        tag = "1.0"
+    else tag = name
+    return tag
+}

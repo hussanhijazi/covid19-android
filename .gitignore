@@ -12,4 +12,7 @@
 /captures
 .externalNativeBuild
 .idea/
-app/src/debug/res/values/google_maps_api.xml
+google_maps_api.xml
+buildSystem/*
+app/google-services.json
+*.aab

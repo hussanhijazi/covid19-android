@@ -100,6 +100,7 @@ class CasesActivity : AppCompatActivity(),
             countryCases.casesPerOneMillion.toString()
         )
 
+
         mapCases.addMarker(googleMap, countryCases, countrySpinner.selectedCountryName)
 
         chartCases.drawChart(countryHistory.timeline.cases, casesChart)
@@ -155,6 +156,7 @@ class CasesActivity : AppCompatActivity(),
 
     private fun showLoading(show: Boolean) {
         if (show)
+            progressBar.show()
         else
             progressBar.hide()
     }

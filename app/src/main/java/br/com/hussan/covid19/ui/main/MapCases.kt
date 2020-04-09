@@ -25,24 +25,27 @@ class MapCases(
     companion object {
         const val MAPVIEW_BUNDLE_KEY = "MAPVIEW_BUNDLE_KEY"
     }
+
     fun addMarker(googleMap: GoogleMap?, country: CountryCases, countryName: String) {
         if (googleMap != null) {
-            val p = geoCoder.getFromLocationName(countryName, 10)
-            val location = LatLng(p.first().latitude, p.first().longitude)
-            googleMap.addMarker(
-                MarkerOptions().position(location)
-                    .snippet(
-                        context.getString(
-                            R.string.cases_deaths_infos,
-                            country.cases,
-                            country.deaths,
-                            country.recovered
+            try {
+                val p = geoCoder.getFromLocationName(countryName, 10)
+                val location = LatLng(p.first().latitude, p.first().longitude)
+                googleMap.addMarker(
+                    MarkerOptions().position(location)
+                        .snippet(
+                            context.getString(
+                                R.string.cases_deaths_infos,
+                                country.cases,
+                                country.deaths,
+                                country.recovered
+                            )
                         )
-                    )
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-            )
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F))
-
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                )
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 5F))
+            } catch (e: Exception) {
+            }
         }
     }
 
