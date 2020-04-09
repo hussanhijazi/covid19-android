@@ -11,31 +11,5 @@ App to show covid-19 data
 * https://coronavirus-tracker-api.herokuapp.com/
 * https://corona.lmao.ninja/v2/historical/brazil
 * https://coronavirus-19-api.herokuapp.com/
+* https://doc.covid.finspect.me/
 
-## Code
-Using "Clean Architecture" based on Antonio Leivas and BufferApp implementations.
-
-### Modules
-#### domain
-In this module, you will find all models (entities)
-
-#### app
-In this module, you will find all Android classes and UI.
-
-#### data
-In this module you will find all the interfaces/datasources, apis and repos.
-
-#### usecases
-In this module you will find all *usecases* / *iteractors*.
-
-## Some observations
-
-### Koin
-Used for dependency injection (easy to use and fulfills all requirements here).
-
-### Continuous Integration 
-Using Bitrise.io for this purpose.
-
-## References
-* Post: https://antonioleiva.com/clean-architecture-android/
-* BufferApp: https://github.com/bufferapp/clean-architecture-components-boilerplate
