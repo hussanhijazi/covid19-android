@@ -1,4 +1,4 @@
-# Clean Architecture
+# Covid19-Android
 App to show covid-19 data
 
 ## Create google_maps_api.xml file in app/src/debug/res/values/ with your Google Maps Key
